@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>Context state preact sample</title>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+    <script src="../dist/context-state.js"></script>
+  </head>
+
+  <body>
+    <div id="entry"></div>
+    <script>
+      const h = React.createElement
+      const {render} = ReactDOM
+      const createState = contextState
+
+      const {
+        StateProvider,
+        GlobalState,
+        addState
+      } = createState()
+
+      const CounterState = addState('Counter', {
+        count: 0,
+        increment({count}, amount) {
+          return {
+            count: count + amount
+          }
+        },
+        decrement({count}, amount) {
+          return {
+            count: count - amount
+          }
+        }
+      })
+      const Counter = () =>
+        h(CounterState, {}, ({count, increment, decrement}) =>
+          h('div', {},
+            h('p', {}, 'count: ', count),
+            h('button', {onClick: () => increment(1)}, '+'),
+            h('button', {onClick: () => decrement(1)}, '-')
+          )
+        )
+        console.log({StateProvider, Counter})
+      render(h(StateProvider, {}, h(Counter)), document.getElementById('entry'))
+    </script>
+  </body>
+</html>
