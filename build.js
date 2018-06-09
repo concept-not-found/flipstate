@@ -4,7 +4,7 @@ const nodeResolve = require('rollup-plugin-node-resolve')
 const babel = require('rollup-plugin-babel')
 const {terser} = require('rollup-plugin-terser')
 
-async function main() {
+async function main () {
   const configs = [
     {
       input: 'index.js',
@@ -24,7 +24,7 @@ async function main() {
       external: ['preact', 'preact-context']
     }
   ]
-  function build(min = false) {
+  function build (min = false) {
     return Promise.all(configs.map(async ({input, output, globals, external}) => {
       const bundle = await rollup({
         input: input,

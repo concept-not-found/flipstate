@@ -21,7 +21,7 @@ function deepMerge (target, source) {
   return destination
 }
 
-function createObjectByPath([head, ...tail], value) {
+function createObjectByPath ([head, ...tail], value) {
   if (!head) {
     return value
   }
@@ -30,7 +30,7 @@ function createObjectByPath([head, ...tail], value) {
   }
 }
 
-function path([head, ...tail], object) {
+function path ([head, ...tail], object) {
   if (!head) {
     return object
   }
@@ -76,7 +76,7 @@ export default (h, Component, createContext) => (initialSpecification = {}) => {
       this.state = wireSpecification(this, [], initialSpecification)
     }
 
-    componentWillMount() {
+    componentWillMount () {
       preAddedStates.forEach(({scope, specification}) => {
         update(createObjectByPath(scope, wireSpecification(this, scope, specification)))
       })

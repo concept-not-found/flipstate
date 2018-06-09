@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "standard"
+  ],
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "ecmaFeatures": {
+      "templateStrings": true,
+      "classes": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+  },
+  "globals": {
+  }
+}
