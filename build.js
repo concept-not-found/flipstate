@@ -8,7 +8,7 @@ async function main () {
   const configs = [
     {
       input: 'index.js',
-      output: 'context-state',
+      output: 'flipstate',
       globals: {
         react: 'React'
       },
@@ -16,7 +16,7 @@ async function main () {
     },
     {
       input: 'preact.js',
-      output: 'context-state.preact',
+      output: 'flipstate.preact',
       globals: {
         preact: 'preact',
         'preact-context': 'preactContext'
@@ -42,7 +42,7 @@ async function main () {
       await bundle.write({
         file: `dist/${output}${min ? '.min' : ''}.js`,
         format: 'umd',
-        name: 'contextState',
+        name: 'flipstate',
         globals
       })
     }))

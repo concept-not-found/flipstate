@@ -70,16 +70,26 @@ export default (h, Component, createContext) => (initialSpecification = {}) => {
 
       that = this
       update = (partial) => {
-        const nextState = deepMerge(this.state, partial)
-        this.setState(nextState)
+        this.setState((state) => deepMerge(state, partial))
       }
       this.state = wireSpecification(this, [], initialSpecification)
+
+      this.value = this.value.bind(this)
+      this.dangerouslySetState = this.dangerouslySetState.bind(this)
     }
 
     componentWillMount () {
       preAddedStates.forEach(({scope, specification}) => {
         update(createObjectByPath(scope, wireSpecification(this, scope, specification)))
       })
+    }
+
+    value () {
+      return this.state
+    }
+
+    dangerouslySetState (state) {
+      this.setState(state)
     }
 
     render () {
@@ -99,15 +109,41 @@ export default (h, Component, createContext) => (initialSpecification = {}) => {
       } else {
         preAddedStates.push({scope, specification})
       }
-      return ({children, render}) => {
-        const closure = typeof children === 'function'
-          ? children
-          : children[0] || render
-        if (!closure) {
-          return
+      let referenceCount = 0
+      let markForDeletion = false
+      class ChildState extends Component {
+        componentDidMount () {
+          referenceCount++
         }
-        return h(State.Consumer, {}, (state) => closure(path(scope, state)))
+
+        componentWillUnmount () {
+          referenceCount--
+          if (markForDeletion && referenceCount === 0) {
+            update(createObjectByPath(scope, undefined))
+          }
+        }
+
+        render () {
+          const {children, render} = this.props
+          const closure = typeof children === 'function'
+            ? children
+            : children[0] || render
+          if (!closure) {
+            return
+          }
+          return h(State.Consumer, {}, (state) => closure(path(scope, state)))
+        }
       }
+      Object.defineProperty(ChildState, 'value', {
+        get: () => path(scope, that.state)
+      })
+      Object.defineProperty(ChildState, 'delete', {
+        value () {
+          markForDeletion = true
+        },
+        writable: false
+      })
+      return ChildState
     }
   }
 }

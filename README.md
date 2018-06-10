@@ -54,6 +54,12 @@ Highlights
  * state is composed of data + actions
  * actions return an update to merge into the state
  * actions can be `async`
+ * read state `value` directly off state components and call `delete` to remove itself (make sure it is actually no longer used or else `undefined` will be rendered)
  * use dynamic import to code split new data/actions/state/components
  * supports preact, just import 'flipstate/preact'. Requires https://github.com/valotas/preact-context
  * incoming dev tool which will allow you to flip to any state
+
+Samples
+-------
+ * [Counter](https://codesandbox.io/s/rro76qy63m)
+ * [Code splitting](https://codesandbox.io/s/pwk9kwl2nm)
