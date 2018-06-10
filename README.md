@@ -62,4 +62,6 @@ Highlights
 Samples
 -------
  * [Counter](https://codesandbox.io/s/rro76qy63m)
+ * [Dyanmic counters](https://codesandbox.io/s/43ykljoy37)
  * [Code splitting](https://codesandbox.io/s/pwk9kwl2nm)
+ * [Blog site](https://codesandbox.io/s/52rm8lovv4)
