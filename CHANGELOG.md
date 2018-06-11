@@ -1,3 +1,6 @@
+## 1.1.2 (June 10, 2018)
+ * added composed state samples to readme
+
 ## 1.1.1 (June 9, 2018)
  * added more samples to readme
 
