@@ -1,3 +1,7 @@
+## 1.2.0 (June 11, 2018)
+ * added hooks for devtool
+ * ensure production builds do not include devtool
+
 ## 1.1.2 (June 10, 2018)
  * added composed state samples to readme
 

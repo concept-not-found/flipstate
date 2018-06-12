@@ -16,6 +16,7 @@
     "react"
   ],
   "rules": {
+    "no-useless-return": "off"
   },
   "globals": {
   }

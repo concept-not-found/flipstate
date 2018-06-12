@@ -1,7 +1,7 @@
-import isObject from 'is-plain-object'
+import isPlainObject from 'is-plain-object'
 
 function deepMerge (target, source) {
-  if (!isObject(target) || !isObject(source)) {
+  if (!isPlainObject(target) || !isPlainObject(source)) {
     return source
   }
   const destination = {}
@@ -37,7 +37,10 @@ function path ([head, ...tail], object) {
   return path(tail, object[head])
 }
 
-export default (h, Component, createContext) => (initialSpecification = {}) => {
+export default (devTool, h, Component, createContext) => (initialSpecification = {}) => {
+  /* START DEVELOPMENT BUILD ONLY */
+  const onStateUpdate = devTool(() => that, () => update)
+  /* END DEVELOPMENT BUILD ONLY */
   const State = createContext({})
 
   let update
@@ -75,7 +78,6 @@ export default (h, Component, createContext) => (initialSpecification = {}) => {
       this.state = wireSpecification(this, [], initialSpecification)
 
       this.value = this.value.bind(this)
-      this.dangerouslySetState = this.dangerouslySetState.bind(this)
     }
 
     componentWillMount () {
@@ -88,11 +90,10 @@ export default (h, Component, createContext) => (initialSpecification = {}) => {
       return this.state
     }
 
-    dangerouslySetState (state) {
-      this.setState(state)
-    }
-
     render () {
+      /* START DEVELOPMENT BUILD ONLY */
+      onStateUpdate()
+      /* END DEVELOPMENT BUILD ONLY */
       return h(State.Provider, {
         value: this.state
       }, this.props.children)

@@ -1,6 +1,8 @@
 const {rollup} = require('rollup')
-const commonjs = require('rollup-plugin-commonjs')
+const conditional = require('rollup-plugin-conditional')
 const nodeResolve = require('rollup-plugin-node-resolve')
+const commonjs = require('rollup-plugin-commonjs')
+const stripCode = require('rollup-plugin-strip-code')
 const babel = require('rollup-plugin-babel')
 const {terser} = require('rollup-plugin-terser')
 
@@ -24,7 +26,7 @@ async function main () {
       external: ['preact', 'preact-context']
     }
   ]
-  function build (min = false) {
+  function build ({devBuild = false, min = false} = {}) {
     return Promise.all(configs.map(async ({input, output, globals, external}) => {
       const bundle = await rollup({
         input: input,
@@ -32,6 +34,12 @@ async function main () {
         plugins: [
           nodeResolve(),
           commonjs(),
+          conditional(!devBuild, [
+            stripCode({
+              start_comment: ' START DEVELOPMENT BUILD ONLY ',
+              end_comment: ' END DEVELOPMENT BUILD ONLY '
+            })
+          ]),
           babel({
             externalHelpers: false,
             exclude: 'node_modules/**'
@@ -40,7 +48,7 @@ async function main () {
         ]
       })
       await bundle.write({
-        file: `dist/${output}${min ? '.min' : ''}.js`,
+        file: `dist/${output}${devBuild ? '.dev' : ''}${min ? '.min' : ''}.js`,
         format: 'umd',
         name: 'flipstate',
         globals
@@ -48,7 +56,7 @@ async function main () {
     }))
   }
 
-  return Promise.all([build(), build(true)])
+  return Promise.all([build(), build({devBuild: true}), build({min: true})])
 }
 
 main()
