@@ -1,3 +1,6 @@
+## 1.3.0 (June 12, 2018)
+ * added ability for devtool to move history backwards and forwards
+
 ## 1.2.0 (June 11, 2018)
  * added hooks for devtool
  * ensure production builds do not include devtool

@@ -33,6 +33,12 @@ export default (getThat, getUpdate) => {
           origin
         }
         return
+      case 'move history backwards':
+        window.history.go(-1)
+        return sendStateToDevTool()
+      case 'move history forwards':
+        window.history.go(1)
+        return sendStateToDevTool()
       default:
         // ignore messages we don't understand
     }
