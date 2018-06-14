@@ -1,4 +1,4 @@
-# <img src="https://cdn.rawgit.com/concept-not-found/flipstate/7fee6a9c/logo/mono-black.svg" width="405" height="165"/>
+# <img src="https://cdn.rawgit.com/concept-not-found/flipstate/0a018d3d/logo/mono-black.svg" width="486" height="198"/>
 
 *Flip to any state*
 
