@@ -64,7 +64,7 @@ Devtool
 
 ### [Try demo](https://concept-not-found.github.io/flipstate-devtool/iframe/https%3A%2F%2Fconcept-not-found.github.io%2Fflipstate-samples%2Fcomposed-state%2F)
 
-You can run the devtool locally https://github.com/concept-not-found/flipstate-devtool or use the hosted version https://concept-not-found.github.io/flipstate-devtool/
+You can run the devtool [locally](https://github.com/concept-not-found/flipstate-devtool) or use the [hosted version](https://concept-not-found.github.io/flipstate-devtool/)
 
 Samples
 -------
