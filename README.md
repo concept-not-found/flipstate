@@ -1,4 +1,4 @@
-# flipstate
+# <img src="https://cdn.rawgit.com/concept-not-found/flipstate/7fee6a9c/logo/mono-black.svg" width="405" height="165"/>
 
 *Flip to any state*
 
@@ -57,7 +57,14 @@ Highlights
  * read state `value` directly off state components and call `delete` to remove itself (make sure it is actually no longer used or else `undefined` will be rendered)
  * use dynamic import to code split new data/actions/state/components
  * supports preact, just import 'flipstate/preact'. Requires https://github.com/valotas/preact-context
- * incoming dev tool which will allow you to flip to any state
+
+Devtool
+-------
+`flipstate` devtool delivers on the promise of "Flip to any state".
+
+### [Try demo](https://concept-not-found.github.io/flipstate-devtool/iframe/https%3A%2F%2Fconcept-not-found.github.io%2Fflipstate-samples%2Fcomposed-state%2F)
+
+You can run the devtool locally https://github.com/concept-not-found/flipstate-devtool or use the hosted version https://concept-not-found.github.io/flipstate-devtool/
 
 Samples
 -------

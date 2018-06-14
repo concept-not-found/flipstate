@@ -1,3 +1,6 @@
+## 1.3.1 (June 13, 2018)
+ * added logo and devtools information
+
 ## 1.3.0 (June 12, 2018)
  * added ability for devtool to move history backwards and forwards
 
